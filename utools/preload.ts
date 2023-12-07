@@ -2,11 +2,12 @@
 // utools文档
 
 // https://www.u.tools/docs/developer/api.html#%E7%AA%97%E5%8F%A3%E4%BA%A4%E4%BA%92
-const axios = require('axios');
+import axios from 'axios';
+import compressing from 'compressing';
+
+const os = require('os');
+const fs = require('fs');
 const child_process = require('child_process');
-const compressing = require('compressing');
-const os = require("os");
-const fs = require("fs");
 
 window.versions = {
     node: () => process.versions.node,

@@ -24,7 +24,8 @@
     "types": [
       "node",
       "utools-api-types"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*.ts",

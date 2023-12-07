@@ -4,7 +4,7 @@ import {Loading} from "element-ui";
 import VConsole from 'vconsole';
 
 let vConsole = new VConsole();
-vConsole.hide()
+vConsole.hideSwitch()
 
 // 监听Ctrl + F12 打开调试
 document.addEventListener('keydown', function (e) {
@@ -56,10 +56,23 @@ export default {
     }
   },
   mounted() {
-    if (utools.dbStorage.getItem('config')) {
+    if (window['utools'] && utools.dbStorage.getItem('config')) {
       this.form = JSON.parse(utools.dbStorage.getItem('config'));
     }
+
     this.init();
+
+    utools.onPluginEnter(({code, type, payload, option}) => {
+      console.log('用户进入插件应用', code, type, payload)
+      if (type === 'files') {
+        this.type = 'preview';
+        let filePaths = [];
+        for (const file of payload) {
+          filePaths.push(file.path);
+        }
+        this.handleImages(filePaths);
+      }
+    })
   },
   methods: {
     async init() {
@@ -76,7 +89,9 @@ export default {
 
       this.loadModelList();
 
-
+      if (this.models.length === 0) {
+        this.$message.error('模型获取失败')
+      }
     },
     async loadModelList() {
       return window.mutils.initModelData(null).then((names: any) => {
