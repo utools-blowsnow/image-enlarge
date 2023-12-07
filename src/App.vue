@@ -147,29 +147,33 @@ export default {
         let fileName = window.mutils.getFileName(filePath);
         let outFilePath = window.mutils.getFilePath(window.mutils.tempOutputPath(), fileName);
 
-        await window.mutils.spawnImageHandle(getSingleImageArguments(filePath, outFilePath,
-            modelPath, this.form.model, this.form.scale, this.form.gpu, this.form.format, this.form.thread), {
-          onProgress: (data: any) => {
-            console.log(data);
-            if (data === 'Upscayl Successful') {
-              data = '100%';
+        try {
+          await window.mutils.spawnImageHandle(getSingleImageArguments(filePath, outFilePath,
+              modelPath, this.form.model, this.form.scale, this.form.gpu, this.form.format, this.form.thread), {
+            onProgress: (data: any) => {
+              console.log(data);
+              if (data === 'Upscayl Successful') {
+                data = '100%';
+              }
+              if (data.indexOf('%') !== -1) {
+                document.querySelector('.loadingBox .el-loading-text').innerHTML = `正在处理图片...${data} , ${index}/${filePaths.length}`;
+              }
             }
-            if (data.indexOf('%') !== -1) {
-              document.querySelector('.loadingBox .el-loading-text').innerHTML = `正在处理图片...${data} , ${index}/${filePaths.length}`;
-            }
-          }
-        });
+          });
 
-        // 获取图片base64
-        let base64 = await window.mutils.getFileBase64(outFilePath);
+          // 获取图片base64
+          let base64 = await window.mutils.getFileBase64(outFilePath);
 
-        files.push({
-          fileName,
-          filePath,
-          outFilePath,
-          base64
-        });
-
+          files.push({
+            fileName,
+            filePath,
+            outFilePath,
+            base64
+          });
+        } catch (e) {
+          console.error(e)
+          this.$message.error("处理失败：" + e.message)
+        }
         index++;
       }
 
