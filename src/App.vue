@@ -87,8 +87,9 @@ export default {
 
       loadingInstance.close();
 
-      this.loadModelList();
+      await this.loadModelList();
 
+      console.log('模型列表', this.models);
       if (this.models.length === 0) {
         this.$message.error('模型获取失败')
       }
