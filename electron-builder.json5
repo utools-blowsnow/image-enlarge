@@ -3,7 +3,7 @@
  */
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  "appId": "YourAppID",
+  "appId": "imageenlarge",
   "asar": true,
   "productName": "YourAppName",
   "icon": "public/logo.ico",
@@ -42,5 +42,5 @@
       "AppImage"
     ],
     "artifactName": "${productName}-Linux-${version}.${ext}"
-  },
+  }
 }

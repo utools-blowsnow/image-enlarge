@@ -1,18 +1,34 @@
 {
   "logo": "logo.png",
+  "main": "index.html",
   "preload": "preload.js",
-  "name": "your plugin ID",
+  "name": "图片无损放大",
   "version": "1.0.0",
-  "pluginName": "template",
-  "description": "plugin template",
-  "author": "QC2168",
-  "homepage": "https://github.com/QC2168",
+  "pluginName": "imageenlarge",
+  "description": "图片无损放大",
+  "author": "blowsnow",
+  "homepage": "https://github.com/utools-blowsnow/image-enlarge",
   "features": [
     {
-      "code": "template",
-      "explain": "插件模板主界面",
+      "code": "open",
+      "explain": "图片无损放大",
       "cmds": [
-        "template"
+        "图片无损放大",
+        "图片",
+        "无损放大"
+      ]
+    },
+    {
+      "code": "files",
+      "explain": "图片无损放大",
+      "cmds": [
+        {
+          "type": "files",
+          "label": "图片",
+          "fileType": "file",
+          "minLength": 1,
+          "maxLength": 20
+        }
       ]
     }
   ]

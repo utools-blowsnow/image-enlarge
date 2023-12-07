@@ -13,7 +13,18 @@ export interface Mutils {
     initBinData: (callback: Function) => Promise<void>;
 
     spawnImageHandle: (args: string[], options?: object) => Promise<void>;
-    getModelList: () => Promise<object>;
+
+    tempOutputPath: () => string;
+
+    getFileName: (path: string) => string;
+
+    getFilePath: (path: string, fileName: string) => string;
+
+    getFileBase64: (path: string) => string;
+
+    getDirFiles(dirPath: string): string[];
+
+    saveImages(files: any[], dirPath: string): Promise<void>;
 }
 
 
